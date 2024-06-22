@@ -1,6 +1,11 @@
 [package]
 name = "rust-scrapper"
-version = "0.1.0"
+version = "1.0.1"
 edition = "2021"
+authors = ["alexeiddg"]
 
 [dependencies]
+async-std = "1.12.0"
+surf = "2.3.2"
+url = "2.5.2"
+html5ever = "0.27.0"
