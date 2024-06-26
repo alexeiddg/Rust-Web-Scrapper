@@ -1,9 +1,5 @@
-use async_std::task;
-use url::Url;
-use rust_scrapper::box_crawl;
+use rust_scrapper::exec_crawler;
 
 fn main() {
-    task::block_on(async {
-        box_crawl(vec![Url::parse("https://www.insidr.ai/ai-tools/").unwrap()], 1, 2).await.unwrap();
-    });
+    exec_crawler("https://www.rust-lang.org/".parse().unwrap(), 1, 2);
 }

@@ -1,5 +1,12 @@
-use html5ever::tokenizer::{TokenSink, TokenSinkResult, Token, TagToken, Tag, TagKind};
 use std::borrow::Borrow;
+use html5ever::tokenizer::{
+    TokenSink,
+    TokenSinkResult,
+    Token,
+    TagToken,
+    Tag,
+    TagKind
+};
 
 #[derive(Default, Debug)]
 pub struct LinkQueue {

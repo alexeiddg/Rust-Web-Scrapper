@@ -4,8 +4,15 @@ version = "1.0.1"
 edition = "2021"
 authors = ["alexeiddg"]
 
+[workspace]
+members = [
+    "",
+    "web-interface"
+]
+
 [dependencies]
-async-std = "1.12.0"
+tokio = { version = "1", features = ["full"] }
 surf = "2.3.2"
 url = "2.5.2"
 html5ever = "0.27.0"
+
