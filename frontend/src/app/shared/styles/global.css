@@ -1,0 +1,15 @@
+:root {
+    --slate-gray: #2D2D2D;
+    --crab-orange: #D35400;
+    --dark-gray: #1C1C1C;
+    --light-gray: #AAAAAA;
+    --accent-blue: #3498DB;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html {
+    background-color: var(--slate-gray);
+    overflow: hidden;
+}
