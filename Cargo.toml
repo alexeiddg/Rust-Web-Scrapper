@@ -5,10 +5,14 @@ edition = "2021"
 authors = ["alexeiddg"]
 
 [workspace]
-members = [
-    "",
-    "web-interface"
-]
+members = ["web-interface"]
+
+[lib]
+path = "lib/src/lib.rs"
+
+[[bin]]
+name = "rust-scrapper"
+path = "lib/src/main.rs"
 
 [dependencies]
 tokio = { version = "1", features = ["full"] }
