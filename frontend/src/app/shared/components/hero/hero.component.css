@@ -55,7 +55,50 @@ button {
     display: flex;
 }
 
+.text-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 8px
+}
 
+form {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    border: 2px solid black;
+    margin-top: 8px;
+    border-radius: 18px;
+    width: 99%;
+}
+
+.form-content {
+    display: flex;
+    width: 100%;
+    margin: 8px;
+}
+
+.form-button {
+    background-color: black;
+    color: white;
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+    background-color: var(--crab-orange);
+}
+
+input[type="text"] {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: transparent;
+    cursor: text;
+}
 
 h1 {
     color: black;

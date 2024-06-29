@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <!-- -->
+    <!---->
     <div class="right-side">
         <div class="content-right">
             <!-- -->
@@ -26,18 +26,21 @@
                 web loader
             </div>
             <!-- -->
-            <form class="" role="search">
-                <div class="">
-                    <label class="" for="query1">
-                        <input type="text" id="query1" name="query1" class="search-input" placeholder="Input field 1" required>
+            <div class="text-container">
+                <h4 style="font-size: 22px; margin-bottom: 0">Ask a website any question</h4>
+                <p style="margin: 8px 0">Ask Questions like:</p>
+            </div>
+            <!---->
+            <form role="search">
+                <div class="form-content">
+                    <label for="urlQuery">
+                        <input type="text" id="urlQuery" name="urlQuery" placeholder="Enter The website URL" required>
                     </label>
-                    <label class="" for="query2">
-                        <input type="text" id="query2" name="query2" class="search-input" placeholder="Input field 2" required>
+                    <label for="nlpQuery">
+                        <input type="text" id="nlpQuery" name="nlpQuery" placeholder="Enter your question or query" required>
                     </label>
                 </div>
-                <div class="submit-container">
-                    <button type="submit" class="submit-button"><span>Submit</span></button>
-                </div>
+                <button type="submit" class="form-button">Submit</button>
             </form>
         </div>
     </div>
