@@ -1,5 +1,4 @@
-pub mod crawler;
-pub mod utils;
-
-pub use crawler::crawler::exec_crawler;
-pub use utils::link_queue::LinkQueue;
+mod crawler;
+mod config;
+pub use crawler::crawler_call;
+pub use config::calculate_optimal_threads;

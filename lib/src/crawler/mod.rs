@@ -1,3 +1,7 @@
-pub(crate) mod crawler;
+mod utils;
+mod crawler;
 mod fetch;
-mod get;
+mod parse;
+
+pub use fetch::fetch_html;
+pub use crawler::crawler_call;

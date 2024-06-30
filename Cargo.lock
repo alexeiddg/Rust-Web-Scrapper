@@ -1361,6 +1361,7 @@ name = "rust-scrapper"
 version = "1.0.1"
 dependencies = [
  "html5ever",
+ "num_cpus",
  "surf",
  "tokio",
  "url",

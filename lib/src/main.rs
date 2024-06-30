@@ -1,5 +1,9 @@
-use rust_scrapper::exec_crawler;
+use rust_scrapper::crawler_call;
 
 fn main() {
-    exec_crawler("https://www.rust-lang.org/".parse().unwrap(), 1, 2);
+    let url= "https://www.rust-lang.org/"
+        .parse().unwrap();
+
+    crawler_call(url, 1, 2);
 }
+

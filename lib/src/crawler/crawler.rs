@@ -1,22 +1,20 @@
 use url::Url;
 use tokio::task;
 use std::collections::HashSet;
+use std::sync::{Arc, Mutex};
 use tokio::runtime::Runtime;
-use std::sync::{ Arc, Mutex };
-use tokio::sync::mpsc::{ channel, Sender };
+use tokio::sync::mpsc::{channel, Sender};
+use crate::crawler::fetch_html;
+use crate::config::calculate_optimal_threads;
 
-use crate::crawler::fetch::fetch_page;
+type CrawlResult = Result<(), Box<dyn std::error::Error + Send + Sync + 'static>>;
+type BoxFuture = std::pin::Pin<Box<dyn std::future::Future<Output = CrawlResult> + Send>>;
 
-const THREADS: usize = 20;
-
-pub type CrawlResult = Result<(), Box<dyn std::error::Error + Send + Sync + 'static>>;
-pub type BoxFuture = std::pin::Pin<Box<dyn std::future::Future<Output = CrawlResult> + Send>>;
-
-pub fn box_crawl(pages: Vec<Url>, current: u8, max: u8) -> BoxFuture {
+fn box_crawl(pages: Vec<Url>, current: u8, max: u8) -> BoxFuture {
     Box::pin(crawl(pages, current, max))
 }
 
-pub async fn crawl(pages: Vec<Url>, current: u8, max: u8) -> CrawlResult {
+async fn crawl(pages: Vec<Url>, current: u8, max: u8) -> CrawlResult {
     println!("Current Depth: {}, Max Depth: {}", current, max);
 
     if current >= max {
@@ -24,11 +22,14 @@ pub async fn crawl(pages: Vec<Url>, current: u8, max: u8) -> CrawlResult {
         return Ok(());
     }
 
+    let optimal_threads = calculate_optimal_threads();
+    println!("Using {} threads for crawling.", optimal_threads);
+
     let to_visit = Arc::new(Mutex::new(pages));
     let visited = Arc::new(Mutex::new(HashSet::new()));
-    let (tx, mut rx) = channel(THREADS);
+    let (tx, mut rx) = channel(optimal_threads);
 
-    for _ in 0..THREADS {
+    for _ in 0..optimal_threads {
         let to_visit = Arc::clone(&to_visit);
         let visited = Arc::clone(&visited);
         let tx = tx.clone();
@@ -63,7 +64,7 @@ async fn crawl_worker(
             continue;
         }
 
-        match fetch_page(&url).await {
+        match fetch_html(&url).await {
             Ok(links) => {
                 tx.send(links).await.unwrap();
             }
@@ -74,7 +75,7 @@ async fn crawl_worker(
     }
 }
 
-pub fn exec_crawler(link: Url, current: u8, max: u8) {
+pub fn crawler_call(link: Url, current: u8, max: u8) {
     let rt = Runtime::new().unwrap();
     rt.block_on(async {
         box_crawl(vec![link], current, max).await.unwrap();
