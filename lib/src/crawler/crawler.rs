@@ -4,7 +4,7 @@ use std::collections::HashSet;
 use std::sync::{Arc, Mutex};
 use tokio::runtime::Runtime;
 use tokio::sync::mpsc::{channel, Sender};
-use crate::crawler::fetch_html;
+use crate::crawler::fetch_urls;
 use crate::config::calculate_optimal_threads;
 
 type CrawlResult = Result<(), Box<dyn std::error::Error + Send + Sync + 'static>>;
@@ -64,7 +64,7 @@ async fn crawl_worker(
             continue;
         }
 
-        match fetch_html(&url).await {
+        match fetch_urls(&url).await {
             Ok(links) => {
                 tx.send(links).await.unwrap();
             }
